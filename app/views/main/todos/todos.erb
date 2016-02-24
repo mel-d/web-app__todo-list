@@ -1,0 +1,8 @@
+Here are all to-dos registered:<br>
+<br>
+<% @todos.each do |t| %>
+<a href="<%= t.id %>">
+<%= t.title %></a>: 
+<%= t.user %>--completed?
+<%= t.completed %><br>
+<% end %>
