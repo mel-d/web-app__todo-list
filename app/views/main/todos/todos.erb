@@ -1,8 +1,13 @@
-Here are all to-dos registered:<br>
+<h1>To-dos</h1>
+(Click on a to-do to see its description.)<br>
 <br>
 <% @todos.each do |t| %>
-<a href="<%= t.id %>">
-<%= t.title %></a>: 
-<%= t.user %>--completed?
-<%= t.completed %><br>
-<% end %>
+<a href="/todos/view_description/<%= t.id %>">
+<%= t.title %></a>: completed?
+<%= t.completed %> 
+<a href="/todos/edit/<%= t.id %>">Update</a>
+<br>
+<% end %><br>
+<br>
+<br>
+<a href="/todos/add">Add a to-do</a> | <a href="/logins/delete_login">Log out</a>

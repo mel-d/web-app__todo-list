@@ -1,18 +1,20 @@
 <h1>Edit a to do</h1>
 
-<form action="/todos/edit" method="post">
+<form action="/todos/edited_todo/<%= @todo.id %>" method="post">
 Title:<br>
-<input type="string" name="title"><br>
+<input type="string" name="title" value="<%= @todo.title %>"><br>
 <br>
 Description:<br>
-<input type="string" name="description"><br>
+<input type="string" name="description" value="<%= @todo.description %>"><br>
 <br>
-Completed?:<br>
+Completed?<br>
 <select name="completed">
   <option value="true">Yes</option>
-  <option value="false">No</option>
+  <option value="false" selected>No</option>
 </select>
   <br><br>
 <input type="submit" value="Submit"><br>
 
 </form><br>
+
+<a href="/todos/delete/<%= @todo.id %>">Delete to-do</a>
