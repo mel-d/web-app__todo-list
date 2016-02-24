@@ -1,0 +1,13 @@
+<form action="/users/user_deleted" method="post">
+Name:<br>
+<input type="string" name="human" value="<%= @current_user.name %>"><br>
+<br>
+Email:<br>
+<input type="string" name="email" value="<%= @current_user.email %>"><br>
+<br>
+Password:<br>
+<input type="string" name="password" value="<%= @current_user.password %>"<br>
+<br>
+<input type="submit" value="Submit"><br>
+
+</form><br>
