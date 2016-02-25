@@ -10,6 +10,15 @@ Description:<br>
 <input type="string" name="description" value="<%= @todo.description %>"><br>
 <br>
 
+Category:<br>
+<select name ="category">
+<% @categories.each do |c| %>
+  <option value="<%= c.id %>"> <%= c.name %> </option>
+<% end %>
+</select>
+<br>
+<br>
+
 User designated:<br>
 <select name="designated">
 <% @users.each do |u| %>

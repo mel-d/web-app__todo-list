@@ -1,0 +1,8 @@
+<h1>Categories</h1>
+
+<% @categories.each do |c| %>
+<%= c.name %> | <a href="/categories/edit/<%= c.id %>">Edit</a>
+<br>
+<% end %><br>
+<br>
+<a href="/todos/todos">To-dos</a> | <a href="/categories/add">Add a category</a>

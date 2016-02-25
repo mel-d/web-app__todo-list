@@ -6,6 +6,7 @@ MyApp.get "/todos/todos" do
 end
 
 MyApp.get "/todos/add" do
+  @categories = Category.all
   @users = User.all
   @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
@@ -16,12 +17,14 @@ MyApp.get "/todos/add" do
 end
 
 MyApp.post "/todos/added_todo" do
+  @categories = Category.all
   @users = User.all
   @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
     @todo = Todo.new
     @todo.title = params[:title]
     @todo.description = params[:description]
+    @todo.category_id = params[:category]
     @todo.completed = false
     @todo.created_by_id = @current_user.id
     @todo.save
@@ -37,6 +40,7 @@ MyApp.get "/todos/view_description/:id" do
 end
 
 MyApp.get "/todos/edit/:id" do
+  @categories = Category.all
   @users = User.all
   @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
@@ -53,9 +57,10 @@ MyApp.post "/todos/edited_todo/:id" do
     @todo = Todo.find_by_id(params[:id])
     @todo.title = params[:title]
     @todo.description = params[:description]
+    @todo.category_id = params[:category]
     @todo.completed = params[:completed]
     @todo.save
-    redirect "/todos/view_description/#{@todo.id}"
+    redirect "/todos/todos"
   else
     redirect "/logins/new_login"
   end

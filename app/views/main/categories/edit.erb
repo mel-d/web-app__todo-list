@@ -1,0 +1,14 @@
+<h1>Edit a category</h1>
+
+<form action="/categories/edited/<%= @category.id %>" method="post">
+
+Category:<br>
+<input type="string" name="category" value="<%= @category.name %> "><br>
+<br>
+<br>
+<input type="submit" value="Submit"><br>
+<br>
+<br>
+</form>
+
+<a href="/categories/delete/<%= @category.id %>">Delete category</a>

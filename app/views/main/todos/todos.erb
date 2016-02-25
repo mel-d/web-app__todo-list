@@ -2,12 +2,16 @@
 (Click on a to-do to see its description.)<br>
 <br>
 <% @todos.each do |t| %>
-<a href="/todos/view_description/<%= t.id %>">
-<%= t.title %></a>: completed?
-<%= t.completed %> 
+<a href="/todos/view_description/<%= t.id %>"> 
+<%= t.title %></a> | Category: 
+<%= t.get_category %> | 
+completed?
+<%= t.completed %> | 
 <a href="/todos/edit/<%= t.id %>">Update</a>
+<br>
 <br>
 <% end %><br>
 <br>
 <br>
-<a href="/todos/add">Add a to-do</a> | <a href="/logins/new_login">Log in</a> | <a href="/logins/delete_login">Log out</a>
+<a href="/todos/add">Add a to-do</a> | <a href="/categories/view">View categories</a><br>
+<a href="/logins/new_login">Log in</a> | <a href="/logins/delete_login">Log out</a>

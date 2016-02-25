@@ -1,12 +1,24 @@
 <h1>Add a to do</h1>
 
 <form action="/todos/added_todo" method="post">
+
 Title:<br>
 <input type="string" name="title"><br>
 <br>
+
 Description:<br>
 <input type="string" name="description"><br>
 <br>
+
+Category:<br>
+<select name ="category">
+<% @categories.each do |c| %>
+  <option value="<%= c.id %>"> <%= c.name %> </option>
+<% end %>
+</select>
+<br>
+<br>
+
 User designated:<br>
 <select name="designated">
 <% @users.each do |u| %>
