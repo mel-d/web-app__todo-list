@@ -1,13 +1,17 @@
-<form action="/users/updated_user" method="post">
+<h1>Edit User</h1>
+
+<form action="/users/updated_user/<%= @user.id %>" method="post">
 Name:<br>
-<input type="string" name="human" value="<%= @current_user.name %>"><br>
+<input type="string" name="human" value="<%= @user.name %>"><br>
 <br>
 Email:<br>
-<input type="string" name="email" value="<%= @current_user.email %>"><br>
+<input type="string" name="email" value="<%= @user.email %>"><br>
 <br>
 Password:<br>
-<input type="string" name="password" value="<%= @current_user.password %>"><br>
+<input type="string" name="password" value="<%= @user.password %>"><br>
 <br>
 <input type="submit" value="Submit"><br>
 
 </form><br>
+<br>
+<a href="/users/delete_user/<%= @user.id %>">Delete user</a>

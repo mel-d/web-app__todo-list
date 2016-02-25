@@ -22,5 +22,10 @@ end
 
 MyApp.get "/logins/delete_login" do
   @current_user = User.find_by_id(session["user_id"])
-  redirect "/"
+  if @current_user == nil
+    redirect "/"
+  else
+    @current_user.delete
+    redirect "/"
+  end
 end

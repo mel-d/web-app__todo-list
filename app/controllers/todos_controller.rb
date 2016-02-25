@@ -1,5 +1,26 @@
 # This controller is for all the CRUD operations related to a Todo.
 
+MyApp.before "/todos/add*" do
+  @current_user = User.find_by_id(session[:user_id])
+  if @current_user == nil
+    redirect "/logins/new_login"
+  end
+end
+
+MyApp.before "/todos/edit*" do
+  @current_user = User.find_by_id(session[:user_id])
+  if @current_user == nil
+    redirect "/logins/new_login"
+  end
+end
+
+MyApp.before "/todos/delete*" do
+  @current_user = User.find_by_id(session[:user_id])
+  if @current_user == nil
+    redirect "/logins/new_login"
+  end
+end
+
 MyApp.get "/todos/todos" do 
   @todos = Todo.all
   erb :"main/todos/todos"

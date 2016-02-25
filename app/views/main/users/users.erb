@@ -2,5 +2,6 @@
 
 <% @users.each do |u| %>
 <%= u.name %> 
-(email <%= u.email %>)<br>
+(email <%= u.email %>) | <a href="/users/update_user/<%= u.id %>">Edit user</a>
+<br>
 <% end %>

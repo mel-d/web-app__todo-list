@@ -31,28 +31,24 @@ MyApp.post "/users/user_created" do
   redirect "/todos/todos"
 end
 
-MyApp.get "/users/update_user" do
+MyApp.get "/users/update_user/:id" do
+  @user = User.find_by_id(params[:id])
   erb :"main/users/update_user"
 end
 
-MyApp.post "/users/updated_user" do
-  @current_user.name = params[:human]
-  @current_user.email = params[:email]
-  @current_user.password = params[:password]
-  @current_user.save
+MyApp.post "/users/updated_user/:id" do
+  @user = User.find_by_id(params[:id])
+  @user.name = params[:human]
+  @user.email = params[:email]
+  @user.password = params[:password]
+  @user.save
   redirect "/users/users"
 end
 
-MyApp.get "/users/delete_user" do
-  erb :"main/users/delete_user"    
-end
-
-MyApp.post "/users/deleted_user" do
-  @current_user.name = params[:human]
-  @current_user.email = params[:email]
-  @current_user.password = params[:password]
-  @current_user.delete
-  redirect "/"
+MyApp.get "/users/delete_user/:id" do
+  @user = User.find_by_id(params[:id])
+  @user.delete
+  redirect "/users/users"    
 end
 
 MyApp.get "/users/users" do
