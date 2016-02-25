@@ -7,8 +7,15 @@ Title:<br>
 Description:<br>
 <input type="string" name="description"><br>
 <br>
-Your email:<br>
-<input type="string" name="email"><br>
+User designated:<br>
+<select name="designated">
+<% @users.each do |u| %>
+  <option value="<%= u.id %>"> <%= u.name %> </option>
+<% end %>
+</select>
+<br>
+<br>
 <input type="submit" value="Submit"><br>
+
 
 </form><br>

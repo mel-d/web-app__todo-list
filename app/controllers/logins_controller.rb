@@ -22,10 +22,5 @@ end
 
 MyApp.get "/logins/delete_login" do
   @current_user = User.find_by_id(session["user_id"])
-  if @current_user != nil
-    session["user_id"] = nil
-    redirect "/"
-  else
-    erb :"main/logins/already_logged_out"
-  end
+  redirect "/"
 end

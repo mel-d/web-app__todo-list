@@ -1,16 +1,27 @@
 <h1>Edit a to do</h1>
 
 <form action="/todos/edited_todo/<%= @todo.id %>" method="post">
+
 Title:<br>
 <input type="string" name="title" value="<%= @todo.title %>"><br>
 <br>
+
 Description:<br>
 <input type="string" name="description" value="<%= @todo.description %>"><br>
 <br>
+
+User designated:<br>
+<select name="designated">
+<% @users.each do |u| %>
+  <option value="<%= u.id %>"> <%= u.name %> </option>
+<% end %>
+</select><br>
+<br>
+
 Completed?<br>
 <select name="completed">
-  <option value="true">Yes</option>
-  <option value="false" selected>No</option>
+  <option value="true"> Yes </option>
+  <option value="false" selected> No </option>
 </select>
   <br><br>
 <input type="submit" value="Submit"><br>

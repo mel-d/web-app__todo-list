@@ -6,7 +6,8 @@ MyApp.get "/todos/todos" do
 end
 
 MyApp.get "/todos/add" do
-  @current_user = User.find_by_id(session["user_id"])
+  @users = User.all
+  @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
     erb :"main/todos/add"
   else
@@ -15,14 +16,14 @@ MyApp.get "/todos/add" do
 end
 
 MyApp.post "/todos/added_todo" do
-  @current_user = User.find_by_id(session["user_id"])
+  @users = User.all
+  @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
-    @current_user = User.find_by_email(params[:email])
     @todo = Todo.new
     @todo.title = params[:title]
     @todo.description = params[:description]
     @todo.completed = false
-    @todo.user_id = @current_user.id
+    @todo.created_by_id = @current_user.id
     @todo.save
     redirect "/todos/todos"
   else
@@ -36,7 +37,8 @@ MyApp.get "/todos/view_description/:id" do
 end
 
 MyApp.get "/todos/edit/:id" do
-  @current_user = User.find_by_id(session["user_id"])
+  @users = User.all
+  @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
     @todo = Todo.find_by_id(params[:id])
     erb :"main/todos/edit"
@@ -46,7 +48,7 @@ MyApp.get "/todos/edit/:id" do
 end
 
 MyApp.post "/todos/edited_todo/:id" do
-  @current_user = User.find_by_id(session["user_id"])
+  @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
     @todo = Todo.find_by_id(params[:id])
     @todo.title = params[:title]
@@ -60,7 +62,7 @@ MyApp.post "/todos/edited_todo/:id" do
 end
 
 MyApp.get "/todos/delete/:id" do
-  @current_user = User.find_by_id(session["user_id"])
+  @current_user = User.find_by_id(session[:user_id])
   if @current_user != nil
     @todo = Todo.find_by_id(params[:id])
     @todo.delete
