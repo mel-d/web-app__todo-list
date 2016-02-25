@@ -7,4 +7,11 @@ class Todo < ActiveRecord::Base
     return @category_object.name
   end
 
+  def get_user
+    @todo_object = Todo.find_by_id(self.id)
+    @user_id = @todo_object.user_id
+    @user_object = User.find_by_id(@user_id)
+    return @user_object.name
+  end
+  
 end

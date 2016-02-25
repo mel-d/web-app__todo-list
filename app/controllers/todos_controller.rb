@@ -27,6 +27,7 @@ MyApp.post "/todos/added_todo" do
     @todo.category_id = params[:category]
     @todo.completed = false
     @todo.created_by_id = @current_user.id
+    @todo.user_id = params[:designated]
     @todo.save
     redirect "/todos/todos"
   else
@@ -71,7 +72,7 @@ MyApp.get "/todos/delete/:id" do
   if @current_user != nil
     @todo = Todo.find_by_id(params[:id])
     @todo.delete
-    erb :"main/todos/deleted"
+    redirect "/todos/todos"
   else
     redirect "/logins/new_login"
   end

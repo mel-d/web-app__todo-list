@@ -1,3 +1,10 @@
+MyApp.before "/categories*" do
+  @current_user = User.find_by_id(session[:user_id])
+  if @current_user == nil
+    redirect "/logins/new_login"
+  end
+end
+
 MyApp.get "/categories/add" do
   erb :"main/categories/add"
 end
