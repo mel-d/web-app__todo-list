@@ -14,7 +14,7 @@ MyApp.post "/users/user_created" do
   @user.email = params[:email]
   @user.password = params[:password]
   @user.save
-  erb :"main/users/user_created"
+  redirect "/todos/todos"
 end
 
 MyApp.get "/users/update_user" do
@@ -22,7 +22,7 @@ MyApp.get "/users/update_user" do
   if @current_user != nil
     erb :"main/users/update_user"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -33,9 +33,9 @@ MyApp.post "/users/user_updated" do
     @current_user.email = params[:email]
     @current_user.password = params[:password]
     @current_user.save
-    erb :"main/users/user_updated"
+    redirect "/users/users"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -44,7 +44,7 @@ MyApp.get "/users/delete_user" do
   if @current_user != nil
     erb :"main/users/delete_user"    
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -55,9 +55,9 @@ MyApp.post "/users/user_deleted" do
     @current_user.email = params[:email]
     @current_user.password = params[:password]
     @current_user.delete
-    erb :"main/users/user_deleted"
+    redirect "/"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 

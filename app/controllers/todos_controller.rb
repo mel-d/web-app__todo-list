@@ -10,7 +10,7 @@ MyApp.get "/todos/add" do
   if @current_user != nil
     erb :"main/todos/add"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -24,9 +24,9 @@ MyApp.post "/todos/added_todo" do
     @todo.completed = false
     @todo.user_id = @current_user.id
     @todo.save
-    erb :"main/todos/added_todo"
+    redirect "/todos/todos"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -41,7 +41,7 @@ MyApp.get "/todos/edit/:id" do
     @todo = Todo.find_by_id(params[:id])
     erb :"main/todos/edit"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -53,9 +53,9 @@ MyApp.post "/todos/edited_todo/:id" do
     @todo.description = params[:description]
     @todo.completed = params[:completed]
     @todo.save
-    erb :"main/todos/edited_todo"
+    redirect "/todos/view_description/#{@todo.id}"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end
 
@@ -66,6 +66,6 @@ MyApp.get "/todos/delete/:id" do
     @todo.delete
     erb :"main/todos/deleted"
   else
-    erb :"main/users/login_first"
+    redirect "/logins/new_login"
   end
 end

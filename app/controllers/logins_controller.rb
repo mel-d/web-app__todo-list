@@ -14,9 +14,9 @@ MyApp.post "/logins/create_login" do
   @user = User.find_by_email(params[:email])
   if @user.password == params[:password]
     session["user_id"] = @user.id
-    erb :"main/logins/create_login"
+    redirect "/todos/todos"
   else
-    erb :"main/logins/password_error"
+    redirect "/logins/new_login"
   end
 end
 
@@ -24,7 +24,7 @@ MyApp.get "/logins/delete_login" do
   @current_user = User.find_by_id(session["user_id"])
   if @current_user != nil
     session["user_id"] = nil
-    erb :"main/logins/delete_login"
+    redirect "/"
   else
     erb :"main/logins/already_logged_out"
   end
