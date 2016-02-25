@@ -4,6 +4,20 @@ MyApp.get "/" do
   erb :"main/welcome"
 end
 
+MyApp.before "/users/update*" do
+  @current_user = User.find_by_id(session[:user_id])
+  if @current_user == nil
+    redirect "/logins/new_login"
+  end
+end
+
+MyApp.before "/users/delete*" do
+  @current_user = User.find_by_id(session[:user_id])
+  if @current_user == nil
+    redirect "/logins/new_login"
+  end
+end
+
 MyApp.get "/users/create_user" do
   erb :"main/users/create_user"
 end
@@ -18,47 +32,27 @@ MyApp.post "/users/user_created" do
 end
 
 MyApp.get "/users/update_user" do
-  @current_user = User.find_by_id(session["user_id"])
-  if @current_user != nil
-    erb :"main/users/update_user"
-  else
-    redirect "/logins/new_login"
-  end
+  erb :"main/users/update_user"
 end
 
-MyApp.post "/users/user_updated" do
-  @current_user = User.find_by_id(session["user_id"])
-  if @current_user != nil
-    @current_user.name = params[:human]
-    @current_user.email = params[:email]
-    @current_user.password = params[:password]
-    @current_user.save
-    redirect "/users/users"
-  else
-    redirect "/logins/new_login"
-  end
+MyApp.post "/users/updated_user" do
+  @current_user.name = params[:human]
+  @current_user.email = params[:email]
+  @current_user.password = params[:password]
+  @current_user.save
+  redirect "/users/users"
 end
 
 MyApp.get "/users/delete_user" do
-  @current_user = User.find_by_id(session["user_id"])
-  if @current_user != nil
-    erb :"main/users/delete_user"    
-  else
-    redirect "/logins/new_login"
-  end
+  erb :"main/users/delete_user"    
 end
 
-MyApp.post "/users/user_deleted" do
-  @current_user = User.find_by_id(session["user_id"])
-  if @current_user != nil
-    @current_user.name = params[:human]
-    @current_user.email = params[:email]
-    @current_user.password = params[:password]
-    @current_user.delete
-    redirect "/"
-  else
-    redirect "/logins/new_login"
-  end
+MyApp.post "/users/deleted_user" do
+  @current_user.name = params[:human]
+  @current_user.email = params[:email]
+  @current_user.password = params[:password]
+  @current_user.delete
+  redirect "/"
 end
 
 MyApp.get "/users/users" do
