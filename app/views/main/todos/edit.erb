@@ -19,12 +19,12 @@ Category:<br>
 <br>
 <br>
 
-User designated:<br>
-<select name="designated">
+User(s) designated:<br>
 <% @users.each do |u| %>
-  <option value="<%= u.id %>"> <%= u.name %> </option>
+<input type="checkbox" name="designated[]" value="<%= u.id %>">
+  <%= u.name %><br>
 <% end %>
-</select><br>
+<br>
 <br>
 
 Completed?<br>

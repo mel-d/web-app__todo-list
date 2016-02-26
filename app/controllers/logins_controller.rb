@@ -25,7 +25,7 @@ MyApp.get "/logins/delete_login" do
   if @current_user == nil
     redirect "/"
   else
-    @current_user.delete
+    session[:user_id] == nil
     redirect "/"
   end
 end
