@@ -75,15 +75,17 @@ end
 MyApp.post "/todos/edited_todo/:id" do
   @current_user = User.find_by_id(session[:user_id])
   @todo = Todo.find_by_id(params[:id])
+  @todo.title = params[:title]
+  @todo.description = params[:description]
+  @todo.category_id = params[:category]
+  @todo.completed = params[:completed]
+  @designated = params[:designated]
   @designated.each do |d|
-    @todo.title = params[:title]
-    @todo.description = params[:description]
-    @todo.category_id = params[:category]
-    @todo.completed = params[:completed]
-    @todo.user_id = d
-    @todo.save
-    redirect "/todos/todos"
+    d.to_i
+    @todo.user_id << d
   end
+  @todo.save
+  redirect "/todos/todos"
 end
 
 MyApp.get "/todos/delete/:id" do
